@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using StudentAdminPortal.API.DataModels;
+using StudentAdminPortal.API.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 //Congufiguration of Db Connection
 builder.Services.AddDbContext<StudentAdminDbContext>(options =>
@@ -16,6 +18,8 @@ builder.Services.AddDbContext<StudentAdminDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString
         ("StudentAdminPortalStrings"));
 });
+builder.Services.AddScoped<IStudentRepository, SqlStudentRepository>();
+
 
 var app = builder.Build();
 

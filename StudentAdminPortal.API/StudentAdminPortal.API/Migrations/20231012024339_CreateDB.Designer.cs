@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentAdminPortal.API.DataModels;
 
@@ -11,9 +12,11 @@ using StudentAdminPortal.API.DataModels;
 namespace StudentAdminPortal.API.Migrations
 {
     [DbContext(typeof(StudentAdminDbContext))]
-    partial class StudentAdminDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231012024339_CreateDB")]
+    partial class CreateDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
