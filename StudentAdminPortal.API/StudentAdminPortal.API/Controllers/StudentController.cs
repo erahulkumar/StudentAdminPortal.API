@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StudentAdminPortal.API.DataModels;
 using StudentAdminPortal.API.Repositories;
@@ -12,25 +11,6 @@ namespace StudentAdminPortal.API.Controllers
     {
         private readonly IStudentRepository studentRepository;
         private readonly IMapper mapper;
-
-        /* [HttpPost]
-public async Task<IActionResult> CreateStudent(StudentRequestDto request)
-{
-//map dto to domain model
-var student = new Student
-{
-FirstName = request.FirstName,
-LastName = request.LastName,
-DateOfBirth= request.DateOfBirth,
-Email= request.Email,
-Moblie= request.Moblie,
-ProfileImageUrl= request.ProfileImageUrl,
-GenderId= request.GenderId,
-Gender= request.Gender,
-Address= request.Address
-
-};
-}*/
         public StudentController(IStudentRepository studentRepository,IMapper mapper)
         {
             this.studentRepository = studentRepository;
@@ -41,7 +21,6 @@ Address= request.Address
         {
             var students = await studentRepository.GetStudentAsync();
 
-            //return Ok(studentRepository.GetStudent());
             return Ok(mapper.Map<List<Student>>(students));
 
             /*var DomainResponse = new List<Student>();
@@ -53,8 +32,8 @@ Address= request.Address
                     FirstName = student.FirstName,
                     LastName = student.LastName,
                     DateOfBirth = student.DateOfBirth,
+                    Moblie = student.Mobile,
                     Email = student.Email,
-                    Mobile = student.Mobile,
                     ProfileImageUrl = student.ProfileImageUrl,
                     GenderId = student.GenderId,
                     Gender = new Gender()
@@ -67,6 +46,8 @@ Address= request.Address
                         Id = student.Address.Id,
                         PhysicalAddress = student.Address.PhysicalAddress,
                         PostalAddress = student.Address.PostalAddress,
+                        StudentId = student.Id
+
                     }
 
                 });
