@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace StudentAdminPortal.API.Migrations
 {
     /// <inheritdoc />
-    public partial class IntitialDb : Migration
+    public partial class Execute : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,7 +32,7 @@ namespace StudentAdminPortal.API.Migrations
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Moblie = table.Column<long>(type: "bigint", nullable: false),
+                    Mobile = table.Column<long>(type: "bigint", nullable: false),
                     ProfileImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GenderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },

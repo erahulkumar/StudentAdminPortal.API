@@ -2,7 +2,7 @@
 
 namespace StudentAdminPortal.API.DTO
 {
-    public class Student
+    public class StudentDto
     {
         public Guid Id { get; set; }
         public string FirstName { get; set; }
@@ -16,8 +16,8 @@ namespace StudentAdminPortal.API.DTO
         public Guid GenderId { get; set; }
 
         //Navigate property
-        public Gender Gender { get; set; }
+        public GenderDto Gender { get; set; }
         //Navigate property
-        public Address Address { get; set; }
+        public AddressDto Address { get; set; }
     }
 }

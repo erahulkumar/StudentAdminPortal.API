@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using StudentAdminPortal.API.DataModels;
+using StudentAdminPortal.API.DTO;
 using StudentAdminPortal.API.Repositories;
 
 namespace StudentAdminPortal.API.Controllers
@@ -54,5 +55,39 @@ namespace StudentAdminPortal.API.Controllers
             }
             return Ok(DomainResponse);*/
         }
+        /*[HttpGet]
+        public async Task<IActionResult> GetById(Guid Id)
+        {
+            var existingStudentId = await studentRepository.GetStudentsByIdAsync(Id);
+            if (existingStudentId != null)
+            {
+                return NotFound();
+            }
+            var response = new StudentDto
+            {
+                Id = Id,
+                FirstName = existingStudentId.FirstName,
+                LastName = existingStudentId.LastName,
+                DateOfBirth = existingStudentId.DateOfBirth,
+                Email = existingStudentId.Email,
+                Moblie = existingStudentId.Mobile,
+                ProfileImageUrl = existingStudentId.ProfileImageUrl,
+                GenderId = existingStudentId.GenderId,
+                Gender = new GenderDto
+                {
+                    Id = existingStudentId.GenderId,
+                    Description = existingStudentId.Gender.Description
+                },
+                Address = new AddressDto
+                {
+                    Id = existingStudentId.Address.Id,
+                    PhysicalAddress = existingStudentId.Address.PhysicalAddress,
+                    PostalAddress = existingStudentId.Address.PostalAddress,
+                    StudentId = existingStudentId.Id
+                }
+            };
+            return Ok(response);
+
+        }*/
     }
 }

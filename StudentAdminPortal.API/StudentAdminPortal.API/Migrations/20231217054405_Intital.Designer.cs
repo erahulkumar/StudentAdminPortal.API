@@ -12,15 +12,15 @@ using StudentAdminPortal.API.DataModels;
 namespace StudentAdminPortal.API.Migrations
 {
     [DbContext(typeof(StudentAdminDbContext))]
-    [Migration("20231004103141_Intitial Db")]
-    partial class IntitialDb
+    [Migration("20231217054405_Intital")]
+    partial class Intital
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.11")
+                .HasAnnotation("ProductVersion", "7.0.14")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -89,7 +89,7 @@ namespace StudentAdminPortal.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("Moblie")
+                    b.Property<long>("Mobile")
                         .HasColumnType("bigint");
 
                     b.Property<string>("ProfileImageUrl")

@@ -1,6 +1,6 @@
 ﻿namespace StudentAdminPortal.API.DTO
 {
-    public class Address
+    public class AddressDto
     {
         public Guid Id { get; set; }
         public string PhysicalAddress { get; set; }

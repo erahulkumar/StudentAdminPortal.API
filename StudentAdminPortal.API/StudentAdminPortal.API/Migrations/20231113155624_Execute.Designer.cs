@@ -12,8 +12,8 @@ using StudentAdminPortal.API.DataModels;
 namespace StudentAdminPortal.API.Migrations
 {
     [DbContext(typeof(StudentAdminDbContext))]
-    [Migration("20231012024339_CreateDB")]
-    partial class CreateDB
+    [Migration("20231113155624_Execute")]
+    partial class Execute
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

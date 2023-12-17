@@ -18,8 +18,20 @@ builder.Services.AddDbContext<StudentAdminDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString
         ("StudentAdminPortalStrings"));
 });
+//Configuration to all interface and implementations
 builder.Services.AddScoped<IStudentRepository, SqlStudentRepository>();
+// permission to used server hits only angular
+builder.Services.AddCors((options) =>
+{
+    options.AddPolicy("angularApplication", (Permitserver) =>
+    {
+        Permitserver.WithOrigins("http://localhost:4200")
+        .AllowAnyHeader()
+        .WithMethods("GET", "POST", "PUT", "DELETE")
+        .WithExposedHeaders("*");
 
+    });
+});
 
 var app = builder.Build();
 
@@ -31,6 +43,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseRouting();
+
+//angular
+
+app.UseCors("angularApplication");
 
 app.UseAuthorization();
 
