@@ -6,7 +6,6 @@ using StudentAdminPortal.API.Repositories;
 
 namespace StudentAdminPortal.API.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     public class StudentController : ControllerBase
     {
@@ -18,9 +17,10 @@ namespace StudentAdminPortal.API.Controllers
             this.mapper = mapper;
         }
         [HttpGet]
+        [Route("[controller]")]
         public async Task<IActionResult> GetAllStudent()
         {
-            var students = await studentRepository.GetStudentAsync();
+            var students = await studentRepository.GetStudentsAsync();
 
             return Ok(mapper.Map<List<Student>>(students));
 
@@ -55,39 +55,19 @@ namespace StudentAdminPortal.API.Controllers
             }
             return Ok(DomainResponse);*/
         }
-        /*[HttpGet]
-        public async Task<IActionResult> GetById(Guid Id)
+        [HttpGet]
+        [Route("[controller]/{studentId:guid}")]
+        public async Task<IActionResult> GetStudentAsync([FromRoute] Guid studentId)
         {
-            var existingStudentId = await studentRepository.GetStudentsByIdAsync(Id);
-            if (existingStudentId != null)
+            //fetch student details
+            var student = await studentRepository.GetStudentAsync(studentId);
+
+            //Return
+            if(student == null)
             {
                 return NotFound();
             }
-            var response = new StudentDto
-            {
-                Id = Id,
-                FirstName = existingStudentId.FirstName,
-                LastName = existingStudentId.LastName,
-                DateOfBirth = existingStudentId.DateOfBirth,
-                Email = existingStudentId.Email,
-                Moblie = existingStudentId.Mobile,
-                ProfileImageUrl = existingStudentId.ProfileImageUrl,
-                GenderId = existingStudentId.GenderId,
-                Gender = new GenderDto
-                {
-                    Id = existingStudentId.GenderId,
-                    Description = existingStudentId.Gender.Description
-                },
-                Address = new AddressDto
-                {
-                    Id = existingStudentId.Address.Id,
-                    PhysicalAddress = existingStudentId.Address.PhysicalAddress,
-                    PostalAddress = existingStudentId.Address.PostalAddress,
-                    StudentId = existingStudentId.Id
-                }
-            };
-            return Ok(response);
-
-        }*/
+            return Ok(mapper.Map<Student>(student));
+        }
     }
 }
