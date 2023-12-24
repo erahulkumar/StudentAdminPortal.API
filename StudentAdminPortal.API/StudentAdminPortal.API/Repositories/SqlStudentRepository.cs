@@ -13,6 +13,19 @@ namespace StudentAdminPortal.API.Repositories
             this.dbContext = dbContext;
         }
 
+        public async Task<Student?> DeleteStudentAsync(Guid studentId)
+        {
+            var student = await GetStudentAsync(studentId);
+            if (student != null)
+            {
+                dbContext.Student.Remove(student);
+                dbContext.SaveChanges();
+                return student;
+            }
+
+            return null;
+        }
+
         public async Task<bool> Exists(Guid studentId)
         {
             return await dbContext.Student.AnyAsync(x => x.Id == studentId);
