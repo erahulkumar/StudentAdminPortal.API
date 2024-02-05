@@ -13,6 +13,13 @@ namespace StudentAdminPortal.API.Repositories
             this.dbContext = dbContext;
         }
 
+        public async Task<Student> AddStudentAsync(Student request)
+        {
+            var student=await dbContext.Student.AddAsync(request);
+            await dbContext.SaveChangesAsync();
+            return student.Entity;
+        }
+
         public async Task<Student?> DeleteStudentAsync(Guid studentId)
         {
             var student = await GetStudentAsync(studentId);
@@ -43,7 +50,7 @@ namespace StudentAdminPortal.API.Repositories
 
         public async Task<List<Student>> GetStudentsAsync()
         {
-            return await dbContext.Student.Include(nameof(Gender)).Include(nameof(Address)).ToListAsync();
+            return await dbContext.Student.Include(nameof(Gender)).Include(nameof(Address)).OrderBy(x => x.FirstName).ToListAsync();
 
         }
 
